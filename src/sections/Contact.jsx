@@ -46,9 +46,11 @@ export default function Contact() {
         SERVICE_ID,
         TEMPLATE_ID,
         {
-          ...formData,
           from_name: formData.name,
           reply_to: formData.email,
+          service: formData.service,
+          budget: formData.budget,
+          idea: formData.idea,
         },
         PUBLIC_KEY
       );
@@ -71,10 +73,11 @@ export default function Contact() {
       id="contact"
       className="w-full min-h-screen relative bg-black overflow-hidden text-white py-20 px-6 md:px-20 flex flex-col md:flex-row items-center gap-10"
     >
-      {/* Particles visible behind content */}
+      {/* Particles background */}
       <ParticlesBackground className="absolute inset-0 z-0" />
 
       <div className="relative z-10 w-full flex flex-col md:flex-row items-center gap-10">
+        {/* Image Animation */}
         <motion.div
           className="w-full md:w-1/2 flex justify-center"
           initial={{ opacity: 0, x: -50 }}
@@ -90,6 +93,7 @@ export default function Contact() {
           />
         </motion.div>
 
+        {/* Form */}
         <motion.div
           className="w-full md:w-1/2 bg-white/5 p-8 rounded-2xl shadow-lg border border-white/10"
           initial={{ opacity: 0, x: 50 }}
@@ -99,7 +103,7 @@ export default function Contact() {
           <h2 className="text-3xl font-bold mb-6">Let's Work Together</h2>
           <form className="flex flex-col gap-5" onSubmit={handleSubmit}>
             {/* Name */}
-            <div className="flex flex-col ">
+            <div className="flex flex-col">
               <label className="mb-1">
                 Your Name<span className="text-red-500">*</span>
               </label>
@@ -110,7 +114,7 @@ export default function Contact() {
                 value={formData.name}
                 onChange={handleChange}
                 className={`p-3 rounded-md bg-white/10 border ${
-                  errors.name ? "border-red-500" : "boredr-gray-500"
+                  errors.name ? "border-red-500" : "border-gray-500"
                 } text-white focus:outline-none focus:border-blue-500`}
               />
               {errors.name && <p className="text-red-500 text-xs">{errors.name}</p>}
@@ -122,13 +126,13 @@ export default function Contact() {
                 Your Email<span className="text-red-500">*</span>
               </label>
               <input
-                type="text"
+                type="email"
                 name="email"
                 placeholder="Your Email"
                 value={formData.email}
                 onChange={handleChange}
                 className={`p-3 rounded-md bg-white/10 border ${
-                  errors.email ? "border-red-500" : "boredr-gray-500"
+                  errors.email ? "border-red-500" : "border-gray-500"
                 } text-white focus:outline-none focus:border-blue-500`}
               />
               {errors.email && <p className="text-red-500 text-xs">{errors.email}</p>}
@@ -144,7 +148,7 @@ export default function Contact() {
                 value={formData.service}
                 onChange={handleChange}
                 className={`p-3 rounded-md bg-white/10 border ${
-                  errors.service ? "border-red-500" : "boredr-gray-500"
+                  errors.service ? "border-red-500" : "border-gray-500"
                 } text-white focus:outline-none focus:border-blue-500`}
               >
                 <option value="" disabled>
@@ -179,7 +183,7 @@ export default function Contact() {
                   value={formData.budget}
                   onChange={handleChange}
                   className={`p-3 rounded-md bg-white/10 border ${
-                    errors.budget ? "border-red-500" : "boredr-gray-500"
+                    errors.budget ? "border-red-500" : "border-gray-500"
                   } text-white focus:outline-none focus:border-blue-500`}
                 />
                 {errors.budget && <p className="text-red-500 text-xs">{errors.budget}</p>}
@@ -198,7 +202,7 @@ export default function Contact() {
                 value={formData.idea}
                 onChange={handleChange}
                 className={`p-3 rounded-md bg-white/10 border ${
-                  errors.idea ? "border-red-500" : "boredr-gray-500"
+                  errors.idea ? "border-red-500" : "border-gray-500"
                 } text-white focus:outline-none focus:border-blue-500`}
               ></textarea>
               {errors.idea && <p className="text-red-500 text-xs">{errors.idea}</p>}
@@ -216,7 +220,7 @@ export default function Contact() {
                 }`}
               >
                 {status === "sending"
-                  ? "sending..."
+                  ? "Sending..."
                   : status === "success"
                   ? "Message Sent successfully ✅"
                   : "Something went wrong ❌"}
@@ -230,7 +234,7 @@ export default function Contact() {
               disabled={status === "sending"}
               type="submit"
             >
-              {status === "sending" ? "sending..." : "Send Message"}
+              {status === "sending" ? "Sending..." : "Send Message"}
             </motion.button>
           </form>
         </motion.div>
